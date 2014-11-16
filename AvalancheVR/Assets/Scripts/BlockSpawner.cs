@@ -12,6 +12,7 @@ public class BlockSpawner : MonoBehaviour
     private float spawn_time_max = 2f, spawn_time_min = 0.5f;
     private float spawn_timer;
 
+	private float upSpeed = 2f;
 
     public void Start()
     {
@@ -27,6 +28,8 @@ public class BlockSpawner : MonoBehaviour
             SpawnBlock();
             SetTimer();
         }
+
+		transform.Translate (Vector3.up * Time.deltaTime * upSpeed);
     }
 
     private void SpawnBlock()
