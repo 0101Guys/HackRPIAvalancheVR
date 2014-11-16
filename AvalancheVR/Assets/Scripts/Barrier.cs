@@ -14,9 +14,10 @@ public class Barrier : MonoBehaviour
     public void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
-        {
+        {   
             Player p = collider.GetComponent<Player>();
             p.Kill();
+           
         }
     }
 }
