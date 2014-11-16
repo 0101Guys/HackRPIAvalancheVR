@@ -10,6 +10,9 @@ public class Block : MonoBehaviour
         Block block = col.collider.GetComponent<Block>();
         if (block && block.moving) return;
 
+		if (col.gameObject.tag == "Player") {
+			// Kill player.
+		}
         rigidbody.isKinematic = true;
         moving = false;
     }
