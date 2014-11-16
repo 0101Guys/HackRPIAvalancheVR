@@ -149,7 +149,7 @@ public class OVRPlayerController : MonoBehaviour
 		}
 
 		UpdateMovement();
-        
+        UpdateJumping();
 
 		Vector3 moveDirection = Vector3.zero;
 
@@ -159,7 +159,6 @@ public class OVRPlayerController : MonoBehaviour
 		MoveThrottle.y = (MoveThrottle.y > 0.0f) ? (MoveThrottle.y / motorDamp) : MoveThrottle.y;
 		MoveThrottle.z /= motorDamp;
 
-        UpdateJumping();
 		moveDirection += MoveThrottle * SimulationRate * Time.deltaTime;
 
 		// Gravity
@@ -188,6 +187,7 @@ public class OVRPlayerController : MonoBehaviour
 
 		if (predictedXZ != actualXZ)
 			MoveThrottle += (actualXZ - predictedXZ) / (SimulationRate * Time.deltaTime);
+
 	}
 
 	public virtual void UpdateMovement()
@@ -309,17 +309,15 @@ public class OVRPlayerController : MonoBehaviour
 
     public virtual void UpdateJumping()
     {
-        Debug.Log(MoveThrottle.y);
+        
 
-        if (MoveThrottle.y <= 0.01f)
-        {
+        current_jump_force -= Time.deltaTime * 0.2f;
+        if (current_jump_force <= 0)
             jumping = false;
-        }
-        else
+
+        if (jumping)
         {
-           
-            MoveThrottle.y = Mathf.Lerp(MoveThrottle.y, 0, Time.deltaTime);
-            MoveThrottle += new Vector3(0, JumpForce, 0);
+            MoveThrottle.y = current_jump_force;
         }
     }
 
@@ -333,7 +331,7 @@ public class OVRPlayerController : MonoBehaviour
 			return false;
 
         jumping = true;
-        Debug.Log("jump");
+        current_jump_force = JumpForce;
 
 		return true;
 	}

@@ -36,8 +36,10 @@ public class BackgroundObjectSpawner : MonoBehaviour
 		float w = bs.spawn_square_width / 2f;
 		bool b;
 		float x, z;
+		int c;
 		Transform sphere;
 		Vector3 pos;
+
 
 		for (int i = 0; i < 5; i++) {
 						if (Random.Range (0, 2) == 0)
@@ -56,14 +58,13 @@ public class BackgroundObjectSpawner : MonoBehaviour
 								z = Random.Range (bs.transform.position.z + w + inner_dist, bs.transform.position.z + w + outer_dist);
 						else
 								z = Random.Range (bs.transform.position.z + w - outer_dist, bs.transform.position.z + w - inner_dist);
-						pos = new Vector3 (x, Random.Range (transform.position.y - 12, transform.position.y + 46), z);
+						pos = new Vector3 (x, Random.Range (transform.position.y - outer_dist, transform.position.y + outer_dist), z);
 						
 
 						if (Random.Range (0, 2) == 0)
 								b = true;
 						else
 								b = false;
-						Debug.Log (b);
 						if (b)
 								sphere = (Transform)Instantiate (sphere_prefab, pos, Quaternion.identity);
 						else
@@ -71,6 +72,20 @@ public class BackgroundObjectSpawner : MonoBehaviour
 		
 						float scale = Random.Range (width_min, width_max);
 						sphere.transform.localScale = new Vector3 (scale, scale, scale);
+						c = Random.Range (0, 5);
+				switch(c){
+						case 0: sphere.transform.renderer.material.color = Color.red;
+						break;
+			case 1: sphere.transform.renderer.material.color = Color.green;
+				break;
+			case 2: sphere.transform.renderer.material.color = Color.blue;
+				break;
+			case 3: sphere.transform.renderer.material.color = Color.yellow;
+				break;
+			case 4: sphere.transform.renderer.material.color = Color.cyan;
+				break;
+			default: break;
+			}
 				}
 	}
 	private void SetTimer()
