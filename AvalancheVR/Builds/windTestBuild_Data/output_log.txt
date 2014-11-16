@@ -1,0 +1,19 @@
+Initialize engine version: 4.5.3f3 (fca41a4fabea)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 460M          (ID=0xdd1)
+    Vendor:   NVIDIA
+    VRAM:     1483 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Andrew\Documents\HackRPIAvalancheVR\AvalancheVR\Builds\windTestBuild_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Andrew\Documents\HackRPIAvalancheVR\AvalancheVR\Builds\windTestBuild_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Andrew\Documents\HackRPIAvalancheVR\AvalancheVR\Builds\windTestBuild_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Andrew\Documents\HackRPIAvalancheVR\AvalancheVR\Builds\windTestBuild_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+- Completed reload, in  0.074 seconds
+<RI> Initializing input.
+XInput1_3.dll not found.
+<RI> Input initialized.
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+Platform assembly: C:\Users\Andrew\Documents\HackRPIAvalancheVR\AvalancheVR\Builds\windTestBuild_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Andrew\Documents\HackRPIAvalancheVR\AvalancheVR\Builds\windTestBuild_Data\Managed\System.dll (this message is harmless)
