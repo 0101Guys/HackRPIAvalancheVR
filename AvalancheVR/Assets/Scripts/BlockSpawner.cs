@@ -39,7 +39,7 @@ public class BlockSpawner : MonoBehaviour
         {
             spawn_timer -= time_step;
 
-            // spawn
+            // spawn    
             if (spawn_timer <= 0)
             {
                 SpawnBlock();
