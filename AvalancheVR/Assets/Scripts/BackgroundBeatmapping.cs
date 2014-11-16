@@ -7,6 +7,7 @@ public class BackgroundBeatmapping : MonoBehaviour {
 	private float bpm = 130f;
 	private float offset = 0f;
 	public float pulseTimer;
+	private float lastColorIndex = 0;
 
 	private int maxSpheres = 30;
 
@@ -43,6 +44,9 @@ public class BackgroundBeatmapping : MonoBehaviour {
 	private void Pulse() {
 		Debug.Log ("Pulse");
 		int index = Random.Range (0, 5);
+		if (index == lastColorIndex) {
+			index = (index + 1) % 5;
+		}
 		foreach (GameObject sphere in bgSpheres) {
 			Debug.Log ("change sphere in list");	
 			sphere.renderer.material.SetColor("_TintColor", colors[index]);
