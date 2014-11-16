@@ -75,8 +75,12 @@ public class OVRPlayerController : MonoBehaviour
 
 	private float MoveScale = 1.0f;
 	private Vector3 MoveThrottle = Vector3.zero;
-	private float FallSpeed = 0.0f;	
-	private OVRPose? InitialPose;
+	private float FallSpeed = 0.0f;
+
+    private bool jumping = false;
+	private float current_jump_force;
+
+    private OVRPose? InitialPose;
 	
 	/// <summary>
 	/// If true, each OVRPlayerController will use the player's physical height.
@@ -145,6 +149,7 @@ public class OVRPlayerController : MonoBehaviour
 		}
 
 		UpdateMovement();
+        
 
 		Vector3 moveDirection = Vector3.zero;
 
@@ -154,6 +159,7 @@ public class OVRPlayerController : MonoBehaviour
 		MoveThrottle.y = (MoveThrottle.y > 0.0f) ? (MoveThrottle.y / motorDamp) : MoveThrottle.y;
 		MoveThrottle.z /= motorDamp;
 
+        UpdateJumping();
 		moveDirection += MoveThrottle * SimulationRate * Time.deltaTime;
 
 		// Gravity
@@ -193,6 +199,9 @@ public class OVRPlayerController : MonoBehaviour
 		bool moveLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
 		bool moveRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
 		bool moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        bool jump = Input.GetButtonDown("Jump");
+
+        if (jump) Jump();
 
 		bool dpad_move = false;
 
@@ -215,8 +224,8 @@ public class OVRPlayerController : MonoBehaviour
 			MoveScale = 0.70710678f;
 
 		// No positional movement if we are in the air
-		if (!Controller.isGrounded)
-			MoveScale = 0.0f;
+		//if (!Controller.isGrounded)
+			//MoveScale = 0.0f;
 
 		MoveScale *= SimulationRate * Time.deltaTime;
 
@@ -298,6 +307,23 @@ public class OVRPlayerController : MonoBehaviour
 		transform.rotation = Quaternion.Euler(euler);
 	}
 
+    public virtual void UpdateJumping()
+    {
+        Debug.Log(MoveThrottle.y);
+
+        if (MoveThrottle.y <= 0.01f)
+        {
+            jumping = false;
+        }
+        else
+        {
+           
+            MoveThrottle.y = Mathf.Lerp(MoveThrottle.y, 0, Time.deltaTime);
+            MoveThrottle += new Vector3(0, JumpForce, 0);
+        }
+    }
+
+
 	/// <summary>
 	/// Jump! Must be enabled manually.
 	/// </summary>
@@ -306,7 +332,8 @@ public class OVRPlayerController : MonoBehaviour
 		if (!Controller.isGrounded)
 			return false;
 
-		MoveThrottle += new Vector3(0, JumpForce, 0);
+        jumping = true;
+        Debug.Log("jump");
 
 		return true;
 	}
