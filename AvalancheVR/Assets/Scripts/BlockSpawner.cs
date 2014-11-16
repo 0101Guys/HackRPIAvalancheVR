@@ -13,10 +13,19 @@ public class BlockSpawner : MonoBehaviour
     private float spawn_timer;
 
 	private float upSpeed = 2f;
+	private Color[] blockAccentColors = new Color[5];
+	private int changeAfterXBlocks = 10;
+	private int colorIndex = 0;
 
     public void Start()
     {
         SetTimer();
+		//Set Colors
+		blockAccentColors[0] = Color.red;
+		blockAccentColors[1] = Color.green;
+		blockAccentColors[2] = Color.blue;
+		blockAccentColors[3] = Color.yellow;
+		blockAccentColors[4] = Color.cyan;
     }
 
     public void Update()
@@ -26,6 +35,12 @@ public class BlockSpawner : MonoBehaviour
         if (spawn_timer <= 0)
         {
             SpawnBlock();
+			changeAfterXBlocks -= 1;
+			if (changeAfterXBlocks < 0) {
+				changeAfterXBlocks = 10;
+				IncreaseColorIndex();
+			}
+				
             SetTimer();
         }
 
@@ -42,7 +57,7 @@ public class BlockSpawner : MonoBehaviour
 
         float scale = Random.Range(width_min, width_max);
         block.transform.localScale = new Vector3(scale, scale, scale);
-		c = Random.Range (0, 5);
+		/*c = Random.Range (0, 5);
 		switch(c){
 		case 0: block.transform.renderer.material.color = Color.red;
 			break;
@@ -54,9 +69,16 @@ public class BlockSpawner : MonoBehaviour
 			break;
 		case 4: block.transform.renderer.material.color = Color.cyan;
 			break;
-		default: break;
-		}
+		default: break;*/
+		block.transform.renderer.material.color = blockAccentColors[colorIndex];
     }
+
+	private void IncreaseColorIndex() {
+		colorIndex += 1;
+		if (colorIndex > blockAccentColors.Length-1) {
+			colorIndex = 0;
+		}
+	}
     private void SetTimer()
     {
         spawn_timer = Random.Range(spawn_time_min, spawn_time_max);
