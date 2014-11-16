@@ -4,6 +4,7 @@ using System.Collections;
 public class BlockSpawner : MonoBehaviour 
 {
     public Transform block_prefab;
+	public Transform beatBox_prefab;
     public float spawn_square_width = 10;
 	public int c;
 
@@ -83,16 +84,25 @@ public class BlockSpawner : MonoBehaviour
 		transform.Translate (Vector3.up * Time.deltaTime * upSpeed);
     }
 
-    private void SpawnBlock()
-    {
-        float w = spawn_square_width / 2f;
-        float x = Random.Range(transform.position.x - w, transform.position.x + w);
-        float z = Random.Range(transform.position.z - w, transform.position.z + w);
-        Vector3 pos = new Vector3(x, transform.position.y, z);
-        Transform block = (Transform)Instantiate(block_prefab, pos, Quaternion.identity);
-
-        float scale = Random.Range(width_min, width_max);
-        block.transform.localScale = new Vector3(scale, scale, scale);
+	private void SpawnBlock()
+	{
+		float w = spawn_square_width / 2f;
+		float x = Random.Range(transform.position.x - w, transform.position.x + w);
+		float z = Random.Range(transform.position.z - w, transform.position.z + w);
+		Vector3 pos = new Vector3(x, transform.position.y, z);
+		
+		float spawnDiff =  Random.Range (0.0f, 1.0f);
+		Transform block;
+		if (spawnDiff < .95f)
+			block = (Transform)Instantiate(block_prefab, pos, Quaternion.identity);
+		else
+			block = (Transform)Instantiate (beatBox_prefab, pos, Quaternion.identity);
+		
+		float scale = Random.Range(width_min, width_max);
+		block.transform.localScale = new Vector3(scale, scale, scale);
+		
+		if (spawnDiff >= .95f)
+			block.gameObject.GetComponent<BeatBox>().startingScaleX = scale;
 		/*c = Random.Range (0, 5);
 		switch(c){
 		case 0: block.transform.renderer.material.color = Color.red;
@@ -106,8 +116,11 @@ public class BlockSpawner : MonoBehaviour
 		case 4: block.transform.renderer.material.color = Color.cyan;
 			break;
 		default: break;*/
-		block.transform.renderer.material.color = blockAccentColors[colorIndex];
-    }
+		
+		if (spawnDiff < .95f)
+			block.transform.renderer.material.color = blockAccentColors[colorIndex];
+		
+	}
 
 	private void IncreaseColorIndex() {
 		colorIndex += 1;
