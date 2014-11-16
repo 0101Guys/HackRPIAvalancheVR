@@ -10,9 +10,10 @@ Platform assembly: C:\Users\Robert Wild\Desktop\HackRPIAvalancheVR\AvalancheVR\b
 Loading C:\Users\Robert Wild\Desktop\HackRPIAvalancheVR\AvalancheVR\build_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\Robert Wild\Desktop\HackRPIAvalancheVR\AvalancheVR\build_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\Robert Wild\Desktop\HackRPIAvalancheVR\AvalancheVR\build_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.057 seconds
+- Completed reload, in  0.047 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1600x900 50Hz; virtual: 1600x900 at 0,0
 Platform assembly: C:\Users\Robert Wild\Desktop\HackRPIAvalancheVR\AvalancheVR\build_Data\Managed\System.Core.dll (this message is harmless)
+WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
 Platform assembly: C:\Users\Robert Wild\Desktop\HackRPIAvalancheVR\AvalancheVR\build_Data\Managed\System.dll (this message is harmless)
