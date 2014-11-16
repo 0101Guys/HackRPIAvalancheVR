@@ -73,8 +73,11 @@ public class GameManager : MonoBehaviour
         }
         else if (Scenestate == SceneState.Game)
         {
-            
+            // quick restart key
+            if (Input.GetKeyDown(KeyCode.Backspace))
+                LoadGame();
         }
+        
     }
 
     public static void LoadDeadScreen()
@@ -87,7 +90,7 @@ public class GameManager : MonoBehaviour
     {
         screen_fade.InstantBlack();
         screen_fade.FadeToClear();
-        Scenestate = SceneState.DeadScreen;
+        Scenestate = SceneState.Game;
         Application.LoadLevel(game_scene);
     }
 

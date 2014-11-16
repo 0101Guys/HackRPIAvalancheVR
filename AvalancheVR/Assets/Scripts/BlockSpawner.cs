@@ -21,9 +21,9 @@ public class BlockSpawner : MonoBehaviour
     {
         SetTimer();
 		//Set Colors
-		blockAccentColors[0] = Color.red;
-		blockAccentColors[1] = Color.green;
-		blockAccentColors[2] = Color.blue;
+		blockAccentColors[0] = Color.blue;
+		blockAccentColors[1] = Color.red;
+		blockAccentColors[2] = Color.green;
 		blockAccentColors[3] = Color.yellow;
 		blockAccentColors[4] = Color.cyan;
     }
