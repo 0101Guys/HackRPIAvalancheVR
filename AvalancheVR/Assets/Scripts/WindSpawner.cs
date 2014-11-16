@@ -6,7 +6,7 @@ public class WindSpawner : MonoBehaviour {
 	public GameObject[] windSpawnLocs;
 	public GameObject windPrefab;
 	private float moveSpeed = 3f;
-	private float spawnTimer = 10f;
+	private float spawnTimer = 15f;
 
 	// Use this for initialization
 	void Start () {

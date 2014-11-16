@@ -52,7 +52,7 @@ public class PlayerMove : MonoBehaviour
 		
 		if (windBoostState) {
 			rigidbody.AddForce(Vector3.up * upwards_speed);
-			
+			Debug.Log ("Boost player");
 			// cap upwards velocity
 			if (rigidbody.velocity.y > wind_upwards_speed)
 				rigidbody.velocity = new Vector3(rigidbody.velocity.x, upwards_speed, rigidbody.velocity.z);
