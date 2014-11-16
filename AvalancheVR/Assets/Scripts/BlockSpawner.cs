@@ -26,15 +26,50 @@ public class BlockSpawner : MonoBehaviour
 		blockAccentColors[2] = Color.green;
 		blockAccentColors[3] = Color.yellow;
 		blockAccentColors[4] = Color.cyan;
+
+        Prewarm();
+    }
+
+    private void Prewarm()
+    {
+        Debug.Log("here");
+        float time_step = 0.02f;
+
+        for (int i = 0; i < 60f * 40f; ++i)
+        {
+            spawn_timer -= time_step;
+
+            // spawn
+            if (spawn_timer <= 0)
+            {
+                SpawnBlock();
+
+                // color change
+                changeAfterXBlocks -= 1;
+                if (changeAfterXBlocks < 0)
+                {
+                    changeAfterXBlocks = 10;
+                    IncreaseColorIndex();
+                }
+
+                SetTimer();
+            }
+
+            // move the spawner
+            transform.Translate(Vector3.up * Time.deltaTime * upSpeed);
+        }
     }
 
     public void Update()
     {
         spawn_timer -= Time.deltaTime;
 
+        // spawn
         if (spawn_timer <= 0)
         {
             SpawnBlock();
+
+            // color change
 			changeAfterXBlocks -= 1;
 			if (changeAfterXBlocks < 0) {
 				changeAfterXBlocks = 10;
@@ -44,6 +79,7 @@ public class BlockSpawner : MonoBehaviour
             SetTimer();
         }
 
+        // move the spawner
 		transform.Translate (Vector3.up * Time.deltaTime * upSpeed);
     }
 

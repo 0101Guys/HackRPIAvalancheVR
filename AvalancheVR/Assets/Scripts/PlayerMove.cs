@@ -14,7 +14,18 @@ public class PlayerMove : MonoBehaviour
 	private bool windBoostState = false;
 	public float fuel = 500f;
 	private const float maxFuel = 500f;
-	
+
+
+    // max height
+    private float start_height = 0;
+    private float max_height = 0;
+
+
+
+    public void Start()
+    {
+        start_height = transform.position.y;
+    }
 	
 	public void Update()
 	{
@@ -40,7 +51,7 @@ public class PlayerMove : MonoBehaviour
 		
 		
 		// upwards 
-		if (input_jump && ValidFuel ())
+		if (input_jump && ValidFuel())
 		{
 			rigidbody.AddForce(Vector3.up * upwards_speed * 50f * Time.deltaTime);
 			DecreaseFuel();
@@ -57,10 +68,16 @@ public class PlayerMove : MonoBehaviour
 			if (rigidbody.velocity.y > wind_upwards_speed)
 				rigidbody.velocity = new Vector3(rigidbody.velocity.x, upwards_speed, rigidbody.velocity.z);
 		}
-		
-		IncreaseFuel ();
+
+
+		// fuel
+		IncreaseFuel();
+
+        // max height
+        max_height = Mathf.Max(max_height, transform.position.y);
 	}
 	
+
 	public void SetWindBoostState(bool state) {
 		windBoostState = state;
 	}
@@ -80,4 +97,10 @@ public class PlayerMove : MonoBehaviour
 			return true;
 		return false;
 	}
+
+    public float GetMaxHeightClimbed()
+    {
+        Debug.Log("here: " + (max_height - start_height));
+        return max_height - start_height;
+    }
 }
