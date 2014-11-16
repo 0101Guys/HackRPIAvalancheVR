@@ -6,8 +6,10 @@ public class BackgroundBeatmapping : MonoBehaviour {
 	
 	private float bpm = 130f;
 	private float offset = 0f;
-	private float pulseTimer;
-	
+	public float pulseTimer;
+
+	private int maxSpheres = 30;
+
 	public List<GameObject> bgSpheres = new List<GameObject>();
 	private List<Color> colors = new List<Color>();
 	// Use this for initialization
@@ -32,6 +34,10 @@ public class BackgroundBeatmapping : MonoBehaviour {
 	
 	public void AddToBeatmapList(GameObject sphere) {
 		bgSpheres.Add (sphere);
+		if (bgSpheres.Count > maxSpheres) {
+			Destroy (bgSpheres[0]);
+			bgSpheres.RemoveAt (0);
+		}
 	}
 	
 	private void Pulse() {
