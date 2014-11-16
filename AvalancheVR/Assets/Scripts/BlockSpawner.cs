@@ -5,11 +5,10 @@ public class BlockSpawner : MonoBehaviour
 {
     public Transform block_prefab;
     public float spawn_square_width = 10;
-    public Rigidbody rigid;
 
     public float width_min = 2, width_max = 3;
 
-    private float spawn_time_max = 2f, spawn_time_min = 0.5f;
+    public float spawn_time_max = 2f, spawn_time_min = 0.5f;
     private float spawn_timer;
 
 	private float upSpeed = 2f;
