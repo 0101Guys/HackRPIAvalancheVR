@@ -5,7 +5,6 @@ public class PlayerMove : MonoBehaviour
 {
     public float move_speed = 5f;
     public float upwards_speed = 15f;
-    public float mouse_speed = 1f;
 
     public Camera left_cam;
     public Transform cam_rig;
@@ -15,7 +14,7 @@ public class PlayerMove : MonoBehaviour
     {
 
         // mouse rotation
-        float euler_y = cam_rig.rotation.eulerAngles.y + Input.GetAxis("Mouse X") * mouse_speed;
+        float euler_y = cam_rig.rotation.eulerAngles.y + Input.GetAxis("Mouse X") * move_speed;
         cam_rig.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, euler_y, transform.rotation.eulerAngles.z));
     }
 
@@ -28,9 +27,7 @@ public class PlayerMove : MonoBehaviour
 
         // move
         Vector3 fwrd = left_cam.transform.rotation * Vector3.forward;
-        Vector3 left = left_cam.transform.rotation * Vector3.left;
-        transform.Translate(fwrd * input_y * Time.deltaTime * move_speed);
-        transform.Translate(left * -input_x * Time.deltaTime * move_speed);
+        transform.Translate(fwrd * input_y * Time.deltaTime);
 
 
 
