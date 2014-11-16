@@ -6,7 +6,8 @@ public class PlayerMove : MonoBehaviour
 	public float move_speed = 5f;
 	public float upwards_speed = 15f;
 	public float mouse_speed = 1f;
-	
+
+    private Player player;
 	public Camera left_cam;
 	public Transform cam_rig;
 	
@@ -14,7 +15,17 @@ public class PlayerMove : MonoBehaviour
 	public float fuel = 500f;
 	private const float maxFuel = 500f;
 	
+    // falling and death (seconds)
+    private float fall_timer;
+    private const float fall_time_before_death = 2.5f;
+
 	
+
+    public void Start()
+    {
+        player = GetComponent<Player>();
+    }
+
 	public void Update()
 	{
 		
@@ -49,6 +60,18 @@ public class PlayerMove : MonoBehaviour
 			
 		}
 		IncreaseFuel ();
+
+
+        // falling
+        if (rigidbody.velocity.y < 0)
+        {
+            fall_timer += Time.deltaTime;
+            if (fall_timer >= fall_time_before_death) player.Kill();
+        }
+        else
+        {
+            fall_timer = 0;
+        }
 	}
 	
 	public void SetWindBoostState(bool state) {
