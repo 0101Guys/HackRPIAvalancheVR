@@ -5,6 +5,7 @@ public class BlockSpawner : MonoBehaviour
 {
     public Transform block_prefab;
     public float spawn_square_width = 10;
+	public int c;
 
     public float width_min = 2, width_max = 3;
 
@@ -41,6 +42,20 @@ public class BlockSpawner : MonoBehaviour
 
         float scale = Random.Range(width_min, width_max);
         block.transform.localScale = new Vector3(scale, scale, scale);
+		c = Random.Range (0, 5);
+		switch(c){
+		case 0: block.transform.renderer.material.color = Color.red;
+			break;
+		case 1: block.transform.renderer.material.color = Color.green;
+			break;
+		case 2: block.transform.renderer.material.color = Color.blue;
+			break;
+		case 3: block.transform.renderer.material.color = Color.yellow;
+			break;
+		case 4: block.transform.renderer.material.color = Color.cyan;
+			break;
+		default: break;
+		}
     }
     private void SetTimer()
     {
