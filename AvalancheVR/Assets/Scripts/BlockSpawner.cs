@@ -29,11 +29,6 @@ public class BlockSpawner : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision col)
-    {
-        rigidbody.isKinematic = true;
-    }
-
     private void SpawnBlock()
     {
         float w = spawn_square_width / 2f;
