@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Wind : MonoBehaviour {
 	public GameObject player;
-	PlayerMove2 playerMovement;
+	PlayerMove playerMovement;
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find ("Player");
-		playerMovement = player.GetComponent<PlayerMove2>();
+		playerMovement = player.GetComponent<PlayerMove>();
 	}
 	
 	// Update is called once per frame
@@ -16,11 +16,14 @@ public class Wind : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col) {
-		player.GetComponent<PlayerMove2>().SetWindBoostState (true);
-		Debug.Log ("Activate Wind boost");
+		if (col.name == "Player") {
+			player.GetComponent<PlayerMove>().SetWindBoostState (true);
+			Debug.Log ("Activate Wind boost");
+		}
 	}
 
 	void OnTriggerExit(Collider col) {
-		player.GetComponent<PlayerMove2>().SetWindBoostState(false);
+		if (col.name == "Player")
+			player.GetComponent<PlayerMove>().SetWindBoostState(false);
 	}
 }
