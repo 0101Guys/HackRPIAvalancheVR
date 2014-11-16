@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum SceneState { DeadScreen, Game }
+public enum SceneState { DeadScreen, StartScreen, Game }
 
 [RequireComponent(typeof(ScreenFadeInOut))]
 
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        if (Scenestate == SceneState.DeadScreen)
+        if (Scenestate == SceneState.DeadScreen || Scenestate == SceneState.StartScreen)
         {
             // space to replay
             if (Input.GetKeyDown(KeyCode.Space))
