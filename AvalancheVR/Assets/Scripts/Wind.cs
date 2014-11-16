@@ -20,16 +20,17 @@ public class Wind : MonoBehaviour {
 		if (col.name == "Player") {
 			player.GetComponent<PlayerMove>().SetWindBoostState (true);
 			Debug.Log ("Activate Wind boost");
-			if (!audio.isPlaying)
+			if (!audio.isPlaying) {
 				audio.Play();
+				Debug.Log ("Play Wind Sounds");
+			}
 		}
 	}
 	
 	void OnTriggerExit(Collider col) {
 		if (col.name == "Player") {
 			player.GetComponent<PlayerMove>().SetWindBoostState(false);
-			if(audio.isPlaying)
-				audio.Stop ();
+			audio.Stop ();
 		}
 	}
 }

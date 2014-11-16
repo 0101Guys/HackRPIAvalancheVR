@@ -16,9 +16,12 @@ public class BeatBox : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pulseUpTimer = GameObject.FindGameObjectWithTag("beatmapper").GetComponent<BackgroundBeatmapping>().pulseTimer;
-		Debug.Log ("Start pulse timer = " + pulseUpTimer);
-		pulseDownTimer = 0.76153846f;
+		GameObject bm = GameObject.FindGameObjectWithTag("beatmapper");
+		if (bm) {
+			pulseUpTimer = bm.GetComponent<BackgroundBeatmapping>().pulseTimer;
+			Debug.Log ("Start pulse timer = " + pulseUpTimer);
+			pulseDownTimer = 0.76153846f;
+		}
 	
 	}
 	

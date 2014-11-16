@@ -55,10 +55,17 @@ public class PlayerMove : MonoBehaviour
 		{
 			rigidbody.AddForce(Vector3.up * upwards_speed * 50f * Time.deltaTime);
 			DecreaseFuel();
+			if (!audio.isPlaying) {
+				audio.Play ();
+			}
 			// cap upwards velocity
 			if (rigidbody.velocity.y > upwards_speed)
 				rigidbody.velocity = new Vector3(rigidbody.velocity.x, upwards_speed, rigidbody.velocity.z);
 			
+		}
+
+		if (!input_jump) {
+			audio.Stop ();
 		}
 		
 		if (windBoostState) {
