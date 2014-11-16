@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
     // camera
     public static ScreenFadeInOut screen_fade;
 
+    // score
+    public Player player;
+    private static float final_climb_height = 0;
+
+
 
 
     public void Awake()
@@ -49,7 +54,10 @@ public class GameManager : MonoBehaviour
         {
             // destroy other instances that are not the already existing singleton
             if (this != _instance)
+            {
+                if (this.player) _instance.player = this.player; // save player reference of new singleton
                 Destroy(this.gameObject);
+            }
         }
     }
     public void Start()
@@ -82,6 +90,7 @@ public class GameManager : MonoBehaviour
 
     public static void LoadDeadScreen()
     {
+        if (_instance.player) final_climb_height = _instance.player.GetHeight();
         screen_fade.InstantBlack();
         Scenestate = SceneState.DeadScreen;
         Application.LoadLevel(dead_screen_scene);
@@ -92,6 +101,13 @@ public class GameManager : MonoBehaviour
         screen_fade.FadeToClear();
         Scenestate = SceneState.Game;
         Application.LoadLevel(game_scene);
+    }
+
+
+
+    public static float GetFinalClimbHeight()
+    {
+        return final_climb_height;
     }
 
 }

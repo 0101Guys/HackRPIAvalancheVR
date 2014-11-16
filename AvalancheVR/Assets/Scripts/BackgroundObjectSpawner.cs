@@ -67,8 +67,10 @@ public class BackgroundObjectSpawner : MonoBehaviour
 								b = false;
 						if (b)
 								sphere = (Transform)Instantiate (sphere_prefab, pos, Quaternion.identity);
-						else
+						else {
 								sphere = (Transform)Instantiate (sphere_prefabx, pos, Quaternion.identity);
+								GameObject.FindGameObjectWithTag("beatmapper").GetComponent<BackgroundBeatmapping>().AddToBeatmapList(sphere.gameObject);
+						}
 		
 						float scale = Random.Range (width_min, width_max);
 						sphere.transform.localScale = new Vector3 (scale, scale, scale);
