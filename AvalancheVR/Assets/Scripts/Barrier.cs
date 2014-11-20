@@ -22,6 +22,7 @@ public class Barrier : MonoBehaviour
             if (playermove.GetMaxHeightClimbed() > player_height_req)
                 move = true;
         }
+		speed += Time.deltaTime * 0.01f;
         
     }
 
